@@ -1,11 +1,31 @@
 import 'package:expense_tracker/widget/expenses.dart';
 import 'package:flutter/material.dart';
 
-var kColorScheme =
-    ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 62, 147, 218));
+var kColorScheme = ColorScheme.fromSeed(
+  seedColor: const Color.fromARGB(255, 154, 78, 204),
+);
+
+var kDarkColorScheme = ColorScheme.fromSeed(
+  brightness: Brightness.dark,
+  seedColor: const Color.fromARGB(255, 65, 9, 98),
+);
 
 void main() {
   runApp(MaterialApp(
+    darkTheme: ThemeData.dark().copyWith(
+      useMaterial3: true,
+      colorScheme: kDarkColorScheme,
+      cardTheme: const CardTheme().copyWith(
+        color: kDarkColorScheme.secondaryContainer,
+        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: kDarkColorScheme.primaryContainer,
+          foregroundColor: kDarkColorScheme.onPrimaryContainer
+        ),
+      ),
+    ),
     theme: ThemeData().copyWith(
       useMaterial3: true,
       colorScheme: kColorScheme,
@@ -19,15 +39,16 @@ void main() {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: kColorScheme.primaryContainer,
+          foregroundColor: kColorScheme.onPrimaryContainer
         ),
       ),
       textTheme: ThemeData().textTheme.copyWith(
-        titleLarge: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: kColorScheme.onSecondaryContainer,
-          fontSize: 16,
-        ),
-      ),
+            titleLarge: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: kColorScheme.onSecondaryContainer,
+              fontSize: 16,
+            ),
+          ),
     ),
     home: const Expenses(),
   ));
